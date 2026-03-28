@@ -7,17 +7,17 @@ const chamadoRoutes = require('./routes/chamadoRoutes');
 
 const app = express();
 
-// Middlewares
 app.use(cors());
 app.use(express.json());
 
-// Serve os arquivos da pasta 'public' (HTML, CSS, JS do Front)
+// Serve o Front-end da pasta public
 app.use(express.static(path.join(__dirname, '../public')));
 
-// Rotas da API
+// Prefixo das rotas da API
 app.use('/api', chamadoRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`🚀 Servidor ON: http://localhost:${PORT}`);
+    console.log(`\n🚀 Sistema HelpDesk Rodando!`);
+    console.log(`🔗 Acesse: http://localhost:${PORT}`);
 });
