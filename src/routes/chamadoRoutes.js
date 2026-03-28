@@ -1,18 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const chamadoController = require('../controllers/chamadoController');
 const authController = require('../controllers/authController');
-const { verificarToken, apenasTecnico } = require('../middlewares/auth');
+const chamadoController = require('../controllers/chamadoController');
+const { verificarToken } = require('../middlewares/auth');
 
-// Rota de Login (Pública)
+// Rotas Livres
 router.post('/login', authController.login);
 
-// Rotas de Chamados (Protegidas)
+// Rotas Protegidas (Precisam do Token JWT)
 router.get('/', verificarToken, chamadoController.listarChamados);
-router.post('/', verificarToken, chamadoController.criarChamado);
-
-// Rotas de Auditoria (Apenas Técnicos)
-router.put('/:id/status', verificarToken, apenasTecnico, chamadoController.atualizarStatus);
-router.get('/:id/historico', verificarToken, apenasTecnico, chamadoController.verHistorico);
+router.post('/', verificarToken, chamadoController.criarChamado); 
+router.put('/:id/status', verificarToken, chamadoController.atualizarStatus);
+router.get('/:id/historico', verificarToken, chamadoController.verHistorico);
 
 module.exports = router;

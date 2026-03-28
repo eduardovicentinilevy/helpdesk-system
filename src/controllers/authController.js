@@ -5,17 +5,13 @@ exports.login = async (req, res) => {
     const { email, senha } = req.body;
     try {
         const [rows] = await db.query('SELECT * FROM usuarios WHERE email = ? AND senha = ?', [email, senha]);
-        if (rows.length === 0) return res.status(401).json({ error: "Credenciais inválidas" });
+        if (rows.length === 0) return res.status(401).json({ error: "E-mail ou senha incorretos" });
 
-        const usuario = rows[0];
-        const token = jwt.sign(
-            { id: usuario.id, role: usuario.role }, 
-            process.env.JWT_SECRET, 
-            { expiresIn: '1h' }
-        );
+        const user = rows[0];
+        const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET || 'secret_fiap', { expiresIn: '2h' });
 
-        res.json({ token, role: usuario.role, nome: usuario.nome });
+        res.json({ token, user: { nome: user.nome, role: user.role } });
     } catch (err) {
-        res.status(500).json({ error: "Erro no servidor" });
+        res.status(500).json({ error: "Erro no login" });
     }
 };

@@ -1,17 +1,102 @@
-<div id="login-screen">
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="pass" placeholder="Senha">
-    <button onclick="fazerLogin()">Entrar</button>
-</div>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechCorp Global Solutions - HelpDesk</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
-<div id="dashboard" style="display:none;">
-    <h2 id="bem-vindo"></h2>
-    <div id="area-tecnico" style="display:none;">
-        <h3>Painel do Técnico (Fila de Chamados)</h3>
-        <div id="lista-chamados"></div>
+    <div id="login-screen" class="container">
+        <div class="logo-wrapper">
+            <div class="logo-t">T</div>
+        </div>
+
+        <div class="brand-header">
+            <h1>TechCorp</h1>
+            <h3>Global Solutions</h3>
+            <p class="login-instruction">Portal de Acesso - Por favor, faça login para continuar.</p>
+        </div>
+
+        <div class="input-group">
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" placeholder="edu@tech.com">
+        </div>
+        
+        <div class="input-group">
+            <label for="pass">Senha:</label>
+            <input type="password" id="pass" placeholder="••••••••">
+        </div>
+
+        <button onclick="fazerLogin()" class="btn-main">Entrar</button>
+
+        <div class="login-footer">
+            <div class="footer-left">
+                <span class="footer-title">Serviços Integrados</span>
+                <div class="footer-icons">
+                    <span>S</span>
+                    <span><i class="fas fa-cloud"></i></span>
+                    <span><i class="fas fa-server"></i></span>
+                </div>
+            </div>
+            <div class="footer-right">
+                <span>&copy; 2026 TechCorp Global Solutions</span>
+                <div class="logo-t-small">T</div>
+            </div>
+        </div>
     </div>
-    <div id="area-cliente" style="display:none;">
-        <h3>Meus Chamados</h3>
-        <button>Abrir Novo Chamado</button>
+
+    <div id="dashboard" class="container dash-container" style="display:none;">
+        <header style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h2 id="bem-vindo" style="color: var(--texto-escuro);"></h2>
+            <button onclick="logout()" class="btn-sm"><i class="fas fa-power-off"></i> Sair</button>
+        </header>
+
+        <div class="metrics-bar">
+            <div class="metric-box"><h4>Abertos</h4><span id="count-aberto">0</span></div>
+            <div class="metric-box"><h4>Andamento</h4><span id="count-progresso">0</span></div>
+            <div class="metric-box"><h4>Resolvidos</h4><span id="count-resolvido">0</span></div>
+        </div>
+
+        <div class="search-box">
+            <input type="text" id="busca" placeholder="Pesquisar por título..." onkeyup="filtrarDados()">
+        </div>
+
+        <div id="area-tecnico" style="display:none;">
+            <h3 style="color: var(--texto-escuro);"><i class="fas fa-tasks"></i> Fila Global</h3>
+            <div id="lista-chamados"></div>
+        </div>
+
+        <div id="area-cliente" style="display:none;">
+            <h3 style="color: var(--texto-escuro);"><i class="fas fa-plus-circle"></i> Novo Chamado</h3>
+            
+            <div class="search-box">
+                <input type="text" id="novo-titulo" placeholder="O que aconteceu?">
+            </div>
+            
+            <div class="input-group">
+                <label for="nova-prioridade">Nível de Urgência:</label>
+                <select id="nova-prioridade" style="width:100%; padding:12px; background:#ffffff; border:1px solid var(--borda-lateral); border-radius:4px; color:var(--texto-escuro); outline:none;">
+                    <option value="Baixa">🟢 Baixa (Pode esperar)</option>
+                    <option value="Média">🟡 Média (Incomoda, mas funciona)</option>
+                    <option value="Alta">🔴 Alta (Sistema parado)</option>
+                </select>
+            </div>
+            
+            <textarea id="novo-desc" placeholder="Detalhe o erro..." style="width:100%; height:80px; margin-bottom:10px; border-radius:5px; border: 1px solid var(--borda-lateral); padding:10px;"></textarea>
+            
+            <button onclick="abrirChamado()" class="btn-main">Abrir Chamado</button>
+            
+            <hr style="margin:20px 0; border:0; border-top:1px solid var(--borda-lateral);">
+            
+            <h3 style="color: var(--texto-escuro);">Meus Chamados</h3>
+            <div id="meus-chamados"></div>
+        </div>
+
     </div>
-</div>
+    
+    <script src="js/app.js"></script>
+</body>
+</html>
