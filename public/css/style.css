@@ -1,49 +1,97 @@
-:root {
-    --primary: #d4af37; /* Dourado/Madeira */
-    --dark: #1a1a1a;    /* Preto Profundo */
-    --light: #f4f4f4;   /* Cinza Claro */
-    --success: #28a745;
-}
+/* --- COMPONENTES DO HELPDESK --- */
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--light);
-    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    background: linear-gradient(135deg, var(--cor-background) 0%, #f0e6d2 100%);
 }
 
-#login-screen {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    border-top: 5px solid var(--primary);
+/* Container de Login e Dashboard */
+#login-screen, #dashboard {
+    background-color: var(--cor-branca);
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px var(--preto-transparente);
+    width: 90%;
+    max-width: 500px;
+    border: 1px solid var(--cor-madeira-tampo);
+    /* Detalhe superior lembrando o headstock do violão */
+    border-top: 8px solid var(--cor-madeira-lateral);
 }
 
-input {
-    display: block;
+#dashboard {
+    max-width: 900px;
+}
+
+/* Inputs com foco no tom Bege/Spruce */
+input, textarea {
     width: 100%;
-    margin-bottom: 1rem;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    padding: 12px;
+    margin-bottom: 1.2rem;
+    border: 2px solid var(--cinza-claro);
+    border-radius: 8px;
+    background-color: var(--cor-branca);
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--cor-madeira-lateral);
+    box-shadow: 0 0 8px var(--cor-madeira-tampo);
+}
+
+/* Botões com efeito Dourado/Madeira */
 button {
     width: 100%;
-    padding: 10px;
-    background: var(--dark);
-    color: var(--primary);
+    padding: 14px;
+    background-color: var(--cor-madeira-lateral);
+    color: var(--cor-madeira-tampo); /* Texto Bege Claro */
     border: none;
-    font-weight: bold;
+    border-radius: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid #723a20; /* Sombra de profundidade */
 }
 
 button:hover {
-    background: var(--primary);
-    color: var(--dark);
+    background-color: var(--cor-secundaria);
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(1px);
+    border-bottom: none;
+}
+
+/* Cards de Chamados (Lista do Técnico) */
+.ticket-card {
+    background-color: var(--cinza-branco);
+    border-left: 5px solid var(--cor-detalhe-dourado); /* Dourado das tarraxas */
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.2s;
+}
+
+.ticket-card:hover {
+    background-color: var(--cor-madeira-tampo);
+    color: var(--cor-principal);
+}
+
+/* Badge de Status */
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    background: var(--cor-madeira-lateral);
+    color: white;
 }
